@@ -1,0 +1,119 @@
+/* Estilo geral (aplicado a todos os dispositivos) */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #ffffff;
+}
+
+/* Contêiner principal */
+.container {
+    max-width: 1200px; /* Largura máxima para grandes telas */
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #348ceb;
+    color: white;
+    padding: 20px 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 20px;
+}
+
+/* Botão padrão */
+button {
+    background-color: #5a87fa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #348ceb;
+    transform: scale(1.05);
+}
+
+/* Imagens */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* RESPONSIVIDADE */
+
+/* Para dispositivos pequenos (smartphones) */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; /* Texto menor para telas pequenas */
+    }
+
+    header {
+        font-size: 1.2rem;
+        padding: 15px 5px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Para dispositivos médios (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    body {
+        font-size: 16px;
+    }
+
+    header {
+        font-size: 1.4rem;
+        padding: 18px 8px;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Para dispositivos grandes (desktops) */
+@media (min-width: 1025px) {
+    body {
+        font-size: 18px;
+    }
+
+    header {
+        font-size: 1.8rem;
+        padding: 20px 10px;
+    }
+
+    button {
+        font-size: 1.1rem;
+        padding: 12px 24px;
+    }
+
+    .container {
+        padding: 30px;
+    }
+}

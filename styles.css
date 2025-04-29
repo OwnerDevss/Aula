@@ -1,0 +1,156 @@
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #1e1e2f;
+    color: #f4f4f4;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* Fundo animado */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bit {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.1);
+    animation: drift 10s infinite ease-in-out;
+}
+
+/* Distribuindo os bits aleatoriamente */
+.bit:nth-child(1) { top: 10%; left: 5%; animation-duration: 8s; }
+.bit:nth-child(2) { top: 20%; left: 15%; animation-duration: 10s; }
+.bit:nth-child(3) { top: 30%; left: 25%; animation-duration: 12s; }
+.bit:nth-child(4) { top: 40%; left: 35%; animation-duration: 9s; }
+.bit:nth-child(5) { top: 50%; left: 45%; animation-duration: 11s; }
+.bit:nth-child(6) { top: 60%; left: 55%; animation-duration: 8s; }
+.bit:nth-child(7) { top: 70%; left: 65%; animation-duration: 13s; }
+.bit:nth-child(8) { top: 80%; left: 75%; animation-duration: 7s; }
+.bit:nth-child(9) { top: 90%; left: 85%; animation-duration: 10s; }
+.bit:nth-child(10) { top: 15%; left: 95%; animation-duration: 9s; }
+.bit:nth-child(11) { top: 25%; left: 50%; animation-duration: 14s; }
+.bit:nth-child(12) { top: 35%; left: 10%; animation-duration: 12s; }
+
+/* Animação do movimento dos bits */
+@keyframes drift {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-30px) translateX(30px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.5;
+    }
+}
+
+/* Apresentação */
+.presentation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    width: 90%;
+    max-width: 800px;
+    background: #282843;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide.active {
+    display: block;
+}
+
+.card {
+    background: #1f1f3a;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #2a2a4a;
+}
+
+.card h3 {
+    color: #5a87fa;
+    margin-bottom: 10px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin: 5px 0;
+}
+
+/* Botões de navegação */
+.controls {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.nav-button {
+    background: #348ceb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background: #5a87fa;
+    transform: scale(1.1);
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
