@@ -50,7 +50,9 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding: 2rem 1rem;
+    padding: 2vw 1vw;
+    width: 100vw;
+    box-sizing: border-box;
 }
 
 .mensagem-unica {
@@ -58,8 +60,8 @@ main {
     box-shadow: none;
     padding: 0;
     margin: 0 auto;
-    min-width: 300px;
-    max-width: 700px;
+    min-width: 240px;
+    max-width: 90vw;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -68,10 +70,10 @@ main {
 }
 
 #mensagemBox {
-    min-height: 280px;
-    min-width: 380px;
+    min-height: 180px;
+    min-width: 0;
     max-width: 600px;
-    width: 100%;
+    width: 95vw;
     /* FUNDO */
     background: linear-gradient(135deg, #ffd08a 80%, #ffcca1 100%);
     border-radius: 30px;
@@ -83,30 +85,11 @@ main {
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 3.5rem 2.2rem;
+    padding: 3vw 2vw;
+    box-sizing: border-box;
+    transition: all 0.3s;
 }
 
-/* Fitas decorativas nas cartas */
-#mensagemBox::before, 
-#mensagemBox::after {
-    content: '';
-    position: absolute;
-    width: 54px;
-    height: 24px;
-    top: -26px;
-    border-radius: 12px 12px 0 0;
-    z-index: 1;
-}
-#mensagemBox::before {
-    left: 32px;
-    background: linear-gradient(120deg, #ffeb3b 50%, #e53935 50%);
-}
-#mensagemBox::after {
-    right: 32px;
-    background: linear-gradient(70deg, #43a047 50%, #1976d2 50%);
-}
-
-/* Fitas decorativas nas cartas */
 #mensagemBox::before, 
 #mensagemBox::after {
     content: '';
@@ -130,7 +113,7 @@ main {
     font-family: 'Pacifico', cursive, 'Segoe Script', sans-serif;
     font-weight: bold;
     color: #388e3c;
-    font-size: 2.1rem;
+    font-size: clamp(1.2rem, 4vw, 2.1rem);
     margin-bottom: 1.5rem;
     text-align: center;
     text-shadow: 1px 2px 8px #ffd54f99;
@@ -139,7 +122,7 @@ main {
 
 .mensagem-texto {
     font-family: 'Segoe Print', 'Segoe UI', Arial, sans-serif;
-    font-size: 1.45rem;
+    font-size: clamp(1rem, 3vw, 1.45rem);
     color: #6d4c41;
     text-align: center;
     line-height: 1.6;
@@ -188,7 +171,9 @@ main {
 }
 
 .fogueira {
-    width: 110px;
+    width: 18vw;
+    max-width: 110px;
+    min-width: 50px;
     margin-bottom: 0.5rem;
     filter: drop-shadow(0 4px 12px #ffb30060);
 }
@@ -202,17 +187,34 @@ footer {
     border-top: 4px solid #ff7043;
 }
 
-/* Responsivo */
+/* Responsivo para telas menores */
 @media (max-width: 700px) {
     #mensagemBox {
         min-width: 0;
-        padding: 2.2rem 0.7rem;
+        max-width: 98vw;
+        padding: 7vw 2vw;
         font-size: 1.05rem;
     }
     .mensagem-destinatario {
-        font-size: 1.25rem;
+        font-size: clamp(1rem, 5vw, 1.4rem);
     }
     .mensagem-texto {
-        font-size: 1.01rem;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+    .fogueira {
+        width: 26vw;
+    }
+    main {
+        padding: 2vw 0.5vw;
+    }
+}
+
+@media (max-width: 430px) {
+    #mensagemBox {
+        margin: 1.2rem 0 1rem 0;
+        padding: 8vw 2vw;
+    }
+    .fogueira {
+        width: 34vw;
     }
 }
