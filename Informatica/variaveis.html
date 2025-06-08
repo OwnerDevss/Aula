@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variáveis em Python</title>
+    <link rel="stylesheet" href="variaveis.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Variáveis em Python</h1>
+            <p>Aprenda como variáveis funcionam em Python e teste seus conhecimentos!</p>
+        </header>
+
+        <main>
+            <section class="introduction">
+                <h2>O que são Variáveis?</h2>
+                <p>Em Python, variáveis são usadas para armazenar dados. Elas são criadas automaticamente quando você atribui um valor a um nome. Não é necessário declarar o tipo da variável, pois o Python faz isso automaticamente.</p>
+                <p>Por exemplo:</p>
+                <code>nome = "Maria"</code>
+                <p>Aqui, criamos uma variável chamada <strong>nome</strong> que guarda o texto <strong>"Maria"</strong>.</p>
+            </section>
+
+            <section class="examples">
+                <h2>Exemplos de Variáveis</h2>
+                <div class="example">
+                    <h3>📌 Número Inteiro</h3>
+                    <code>idade = 25</code>
+                </div>
+                <div class="example">
+                    <h3>📌 Texto (String)</h3>
+                    <code>cidade = "São Paulo"</code>
+                </div>
+                <div class="example">
+                    <h3>📌 Número Decimal (Float)</h3>
+                    <code>altura = 1.75</code>
+                </div>
+                <div class="example">
+                    <h3>📌 Booleano</h3>
+                    <code>aprovado = True</code>
+                </div>
+            </section>
+
+            <section class="game">
+                <h2>🎮 Quiz Interativo</h2>
+                <p>Arraste os valores para os espaços corretos no código abaixo. Quando todas as variáveis forem posicionadas corretamente, o resultado será exibido!</p>
+                <div class="quiz-area">
+                    <div class="code-output">
+                        <code>
+nome = <span class="dropzone" data-answer="João"></span>
+<br>
+idade = <span class="dropzone" data-answer="30"></span>
+<br>
+print(f"{nome} tem {idade} anos.")
+                        </code>
+                        <p id="result"></p>
+                    </div>
+                    <div class="variables">
+                        <h3>Valores disponíveis:</h3>
+                        <div class="draggable" draggable="true" data-value="João">João</div>
+                        <div class="draggable" draggable="true" data-value="20">Vinte</div>
+                        <div class="draggable" draggable="true" data-value="Ana">Papel</div>
+                        <div class="draggable" draggable="true" data-value="30">30</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Desenvolvido para ensinar variáveis em Python de forma interativa e divertida. 🚀</p>
+        </footer>
+    </div>
+    <script src="variaveis.js"></script>
+</body>
+</html>

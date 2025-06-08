@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Interativa</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <!-- Fundo Animado com Bits -->
+    <div class="background">
+        <!-- Adicionando vários bits -->
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <div class="bit">0</div>
+        <div class="bit">1</div>
+        <!-- Repita o bloco acima para criar densidade -->
+    </div>
+
+    <!-- Apresentação -->
+    <div class="presentation">
+        <div class="slide active" id="slide1">
+            <h2>O que são Processos?</h2>
+            <p>Processos são instâncias de programas em execução. Eles são fundamentais para que o sistema operacional gerencie o uso de recursos.</p>
+            <div class="card">
+                <h3>Estados dos Processos</h3>
+                <ul>
+                    <li><strong>Pronto:</strong> O processo está aguardando para ser executado.</li>
+                    <li><strong>Executando:</strong> O processo está sendo processado pela CPU.</li>
+                    <li><strong>Bloqueado:</strong> O processo está aguardando por um recurso (exemplo: entrada do usuário).</li>
+                </ul>
+                <h4>Exemplo:</h4>
+                <p>Um navegador da web é um processo que pode estar "executando" ao carregar uma página, "bloqueado" ao esperar por uma resposta do servidor, ou "pronto" para processar novas solicitações.</p>
+            </div>
+        </div>
+        <div class="slide" id="slide2">
+            <h2>Gerenciamento de Memória</h2>
+            <p>A memória é gerenciada para garantir que vários processos possam coexistir eficientemente, sem interferir uns nos outros.</p>
+            <div class="card">
+                <h3>Técnicas de Gerenciamento</h3>
+                <ul>
+                    <li><strong>Particionamento:</strong> Divide a memória em blocos fixos ou dinâmicos para alocação.</li>
+                    <li><strong>Paginação:</strong> Divide a memória em páginas menores e organiza os dados em blocos.</li>
+                    <li><strong>Memória Virtual:</strong> Usa o disco rígido para estender a memória principal, permitindo que mais processos sejam executados.</li>
+                </ul>
+                <h4>Exemplo:</h4>
+                <p>Ao abrir vários aplicativos no computador, o sistema operacional usa a memória virtual para manter os aplicativos ativos mesmo que a memória RAM esteja cheia.</p>
+            </div>
+        </div>
+        <div class="slide" id="slide3">
+            <h2>Gerenciamento de Arquivos</h2>
+            <p>O gerenciamento de arquivos organiza e controla como os dados são armazenados, acessados e manipulados no sistema.</p>
+            <div class="card">
+                <h3>Sistemas de Arquivos</h3>
+                <ul>
+                    <li><strong>FAT32:</strong> Estrutura simples, usada em dispositivos antigos.</li>
+                    <li><strong>NTFS:</strong> Robusto, com suporte a permissões e recuperação de falhas.</li>
+                    <li><strong>EXT4:</strong> Um sistema de arquivos moderno usado em sistemas Linux.</li>
+                </ul>
+                <h4>Exemplo:</h4>
+                <p>Ao salvar um documento no Word, ele é armazenado no disco rígido usando um sistema de arquivos (ex.: NTFS), que organiza as informações em blocos físicos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles de Navegação -->
+    <div class="controls">
+        <button class="nav-button" id="prev">Anterior</button>
+        <button class="nav-button" id="next">Próximo</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

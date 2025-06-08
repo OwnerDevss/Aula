@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Numeração</title>
+    <link rel="stylesheet" href="dado.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 Sistema de Numeração</h1>
+        <p>Digite um número em Binário, Decimal, Hexadecimal ou Octal e veja os cálculos detalhados!</p>
+        
+        <div class="input-section">
+            <label for="number">📥 Digite o número:</label>
+            <input type="text" id="number" placeholder="Exemplo: 101001">
+            <button id="convert">🔄 Converter</button>
+        </div>
+
+        <div class="result-section">
+            <h2>📈 Resultados:</h2>
+            <p><strong>Binário (Base 2):</strong> <span id="binary">-</span></p>
+            <p><strong>Decimal (Base 10):</strong> <span id="decimal">-</span></p>
+            <p><strong>Hexadecimal (Base 16):</strong> <span id="hexadecimal">-</span></p>
+            <p><strong>Octal (Base 8):</strong> <span id="octal">-</span></p>
+        </div>
+
+        <div class="example-section">
+            <h2>📚 Explicação Detalhada:</h2>
+            <div id="example">-</div>
+        </div>
+    </div>
+    <script src="dado.js"></script>
+</body>
+</html>

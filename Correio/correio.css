@@ -1,0 +1,218 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff8e1 url('https://img.freepik.com/fotos-premium/padrao-de-bandeirinhas-de-festa-junina-nas-cores-vermelho-amarelo-azul-e-verde_67340-12351.jpg?w=900') repeat;
+    background-size: contain;
+    color: #333;
+}
+
+header {
+    background-color: #ffd54f;
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+    border-bottom: 4px solid #ff7043;
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+    color: #d84315;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.bandeirinhas {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.bandeira {
+    width: 32px;
+    height: 32px;
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
+    margin: 0 3px;
+    border: 2px solid #fffbe7;
+}
+.verde    { background: #43a047; }
+.amarela  { background: #ffeb3b; }
+.azul     { background: #1976d2; }
+.vermelha { background: #e53935; }
+.laranja  { background: #ffb300; }
+.roxa     { background: #8e24aa; }
+.rosa     { background: #ec407a; }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+}
+
+.mensagem-unica {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#mensagemBox {
+    min-height: 280px;
+    min-width: 380px;
+    max-width: 600px;
+    width: 100%;
+    /* FUNDO */
+    background: linear-gradient(135deg, #ffd08a 80%, #ffcca1 100%);
+    border-radius: 30px;
+    border: 8px dashed #ffb300;
+    box-shadow: 0 8px 36px 8px #ffd54fa1, 0 2px 16px 2px #c67c1b70;
+    margin: 2rem 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 3.5rem 2.2rem;
+}
+
+/* Fitas decorativas nas cartas */
+#mensagemBox::before, 
+#mensagemBox::after {
+    content: '';
+    position: absolute;
+    width: 54px;
+    height: 24px;
+    top: -26px;
+    border-radius: 12px 12px 0 0;
+    z-index: 1;
+}
+#mensagemBox::before {
+    left: 32px;
+    background: linear-gradient(120deg, #ffeb3b 50%, #e53935 50%);
+}
+#mensagemBox::after {
+    right: 32px;
+    background: linear-gradient(70deg, #43a047 50%, #1976d2 50%);
+}
+
+/* Fitas decorativas nas cartas */
+#mensagemBox::before, 
+#mensagemBox::after {
+    content: '';
+    position: absolute;
+    width: 54px;
+    height: 24px;
+    top: -26px;
+    border-radius: 12px 12px 0 0;
+    z-index: 1;
+}
+#mensagemBox::before {
+    left: 32px;
+    background: linear-gradient(120deg, #ffeb3b 50%, #e53935 50%);
+}
+#mensagemBox::after {
+    right: 32px;
+    background: linear-gradient(70deg, #43a047 50%, #1976d2 50%);
+}
+
+.mensagem-destinatario {
+    font-family: 'Pacifico', cursive, 'Segoe Script', sans-serif;
+    font-weight: bold;
+    color: #388e3c;
+    font-size: 2.1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 2px 8px #ffd54f99;
+    letter-spacing: 1.2px;
+}
+
+.mensagem-texto {
+    font-family: 'Segoe Print', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.45rem;
+    color: #6d4c41;
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 0;
+    word-break: break-word;
+    text-shadow: 1px 2px 8px #ffd54f33;
+}
+
+/* Botão quase escondido */
+.quase-escondido {
+    opacity: 0.1;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #ff7043;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: opacity 0.3s, background 0.3s;
+    z-index: 5;
+    box-shadow: 0 2px 8px #ff704322;
+    outline: none;
+}
+
+#autoStart {
+    top: 12px;
+    left: 12px;
+}
+#autoStop {
+    top: 12px;
+    right: 12px;
+}
+
+.quase-escondido:hover, .quase-escondido:focus {
+    opacity: 0.8;
+    background: #d84315;
+}
+
+.decoracao {
+    text-align: center;
+    margin-top: 2rem;
+    flex-basis: 100%;
+}
+
+.fogueira {
+    width: 110px;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 4px 12px #ffb30060);
+}
+
+footer {
+    text-align: center;
+    background: #ffd54f;
+    padding: 1rem 0;
+    color: #8d6e63;
+    font-size: 1rem;
+    border-top: 4px solid #ff7043;
+}
+
+/* Responsivo */
+@media (max-width: 700px) {
+    #mensagemBox {
+        min-width: 0;
+        padding: 2.2rem 0.7rem;
+        font-size: 1.05rem;
+    }
+    .mensagem-destinatario {
+        font-size: 1.25rem;
+    }
+    .mensagem-texto {
+        font-size: 1.01rem;
+    }
+}
