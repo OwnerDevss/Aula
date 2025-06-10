@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const elements = document.querySelectorAll('.fade-in');
-    const audio = document.getElementById('audio');
     let timers = [];
 
     function sincronizarFrases() {
@@ -16,12 +15,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // SEMPRE mostra as frases ao carregar a página
     sincronizarFrases();
 
-    // Tenta dar play no áudio automaticamente
-    audio.currentTime = 0;
-    audio.play().catch(() => {
-        // Se o navegador bloquear, apenas não toca
-    });
+    // Áudio: tenta tocar, mas não trava nada se não tocar
+    const audio = document.getElementById('audio');
+    if(audio) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+    }
 });
