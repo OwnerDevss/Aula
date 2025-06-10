@@ -16,13 +16,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    audio.addEventListener('play', sincronizarFrases);
+    // SEMPRE mostra as frases ao carregar a página
+    sincronizarFrases();
 
-    // Tenta dar play imediatamente ao carregar a página
+    // Tenta dar play no áudio automaticamente
     audio.currentTime = 0;
-    audio.play().then(() => {
-        // Sucesso
-    }).catch(() => {
+    audio.play().catch(() => {
         // Se o navegador bloquear, apenas não toca
     });
 });
