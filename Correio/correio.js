@@ -5,8 +5,8 @@ const mensagens = [
         mensagem: "SUA MENSAGEM AQUI 💌" // Apenas uma mensagem placeholder
     },
     {
-        destinatario: "Teste"
-        mensagem: "testeando"
+        destinatario: "CORREIO ELEGANTE",
+        mensagem: "SUA MENSAGEM AQUI 💌" // Apenas uma mensagem placeholder
     }
 ];
 
