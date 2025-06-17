@@ -1,24 +1,8 @@
 // Mensagens do Correio Elegante (adicione/remova à vontade)
 const mensagens = [
     {
-        destinatario: "Maria",
-        mensagem: "Seu sorriso ilumina mais que a fogueira desse arraiá! 💌"
-    },
-    {
-        destinatario: "João",
-        mensagem: "Você é o xodó do meu coração. Quer dançar quadrilha comigo? 💃🕺"
-    },
-    {
-        destinatario: "Ana",
-        mensagem: "Quando te vejo, meu coração faz pamonha de alegria! 🌽"
-    },
-    {
-        destinatario: "Pedro",
-        mensagem: "Se beleza desse prêmio na pescaria, você ganhava o maior peixe! 🐟"
-    },
-        {
-        destinatario: "Carlos",
-        mensagem: "Quando te vejo, meu coração faz pamonha de alegria! 🌽"
+        destinatario: "CORREIO ELEGANTE",
+        mensagem: "SUA MENSAGEM AQUI 💌"
     },
 ];
 
