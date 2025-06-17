@@ -5,13 +5,13 @@ const mensagens = [
         mensagem: "SUA MENSAGEM AQUI ✨"
     },
     {
-        destinatario: "CORREIO ELEGANTE",
+        destinatario: "CORREIO ELEGANTE!",
         mensagem: "SUA MENSAGEM AQUI 🔥"
     },
     
     {
-        destinatario: "CORREIO ELEGANTE",
-        mensagem: "SUA MENSAGEM AQUI 🔥"
+        destinatario: "CORREIO ELEGANTE!!",
+        mensagem: "SUA MENSAGEM AQUI! 🔥"
     },    {
         destinatario: "Para todos os forrozeiros",
         mensagem: "Feliz São João, meu povo! 🎉 Que a alegria contamine a todos!"
