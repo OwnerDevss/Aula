@@ -2,11 +2,19 @@
 const mensagens = [
     {
         destinatario: "CORREIO ELEGANTE",
-        mensagem: "SUA MENSAGEM AQUI 💌" // Apenas uma mensagem placeholder
+        mensagem: "SUA MENSAGEM AQUI 💌"
     },
     {
         destinatario: "TESTANDO",
         mensagem: "TESTANDO A SUA MENSAGEM"
+    },
+    {
+        destinatario: "PARA O SÃO JOÃO",
+        mensagem: "Que a alegria te encontre neste arraiá! 🔥"
+    },
+    {
+        destinatario: "DE UM ADMIRADOR(A)",
+        mensagem: "Você é a estrela mais brilhante da minha noite de São João! ✨"
     }
 ];
 
@@ -19,7 +27,11 @@ const btnStart = document.getElementById('autoStart');
 const btnStop = document.getElementById('autoStop');
 
 function mostrarMensagem(i) {
-    if(!mensagens[i]) return;
+    // Garante que o índice é válido para o array de mensagens
+    if (!mensagens[i]) {
+        console.warn(`Índice ${i} fora dos limites do array de mensagens.`);
+        return;
+    }
     mensagemBox.innerHTML = `
         <div class="mensagem-destinatario">Para: ${mensagens[i].destinatario}</div>
         <div class="mensagem-texto">${mensagens[i].mensagem}</div>
@@ -27,51 +39,40 @@ function mostrarMensagem(i) {
 }
 
 function proximaMensagem() {
-    // Com apenas uma mensagem, esta função não fará nada visível,
-    // pois não há uma próxima mensagem para ir.
+    // Avança para a próxima mensagem ou volta para o início se for a última
+    if (mensagens.length === 0) return; // Não faz nada se não houver mensagens
+
     if (indice < mensagens.length - 1) {
         indice++;
-        mostrarMensagem(indice);
-        atualizarEstadoSetas();
+    } else {
+        indice = 0; // Volta para a primeira mensagem
     }
+    mostrarMensagem(indice);
+    atualizarEstadoSetas(); // Mantido para consistência, mesmo sem setas visíveis
 }
 
 function mensagemAnterior() {
-    // Com apenas uma mensagem, esta função não fará nada visível,
-    // pois não há uma mensagem anterior para ir.
+    // Volta para a mensagem anterior ou vai para o final se for a primeira
+    if (mensagens.length === 0) return; // Não faz nada se não houver mensagens
+
     if (indice > 0) {
         indice--;
-        mostrarMensagem(indice);
-        atualizarEstadoSetas();
+    } else {
+        indice = mensagens.length - 1; // Volta para a última mensagem
     }
+    mostrarMensagem(indice);
+    atualizarEstadoSetas(); // Mantido para consistência, mesmo sem setas visíveis
 }
 
 function iniciarAuto() {
-    // Se há apenas uma mensagem, o loop automático não terá para onde avançar.
-    // Ele vai tentar ir para 'indice = 1', que não existe, e parar.
-    // Para uma única mensagem, o `setInterval` não é muito útil para transição.
-    // Se quiser que ele 'reexiba' a mesma mensagem, pode ajustar aqui,
-    // mas para uma só, não há transição de fato.
-    if (timer) return;
+    if (timer) return; // Impede múltiplos timers
+
+    // Inicia o intervalo para trocar de mensagens
     timer = setInterval(() => {
-        // Se houver apenas 1 mensagem, indice sempre será 0 e (mensagens.length - 1) também será 0.
-        // A condição `indice < mensagens.length - 1` sempre será falsa.
-        // Portanto, o `else` será executado imediatamente no primeiro tick.
-        // E como `indice = 0` já é a mensagem atual, não haverá mudança visível.
-        if (indice < mensagens.length - 1) {
-            indice++;
-            mostrarMensagem(indice);
-            atualizarEstadoSetas();
-        } else {
-            // Volta para o início após a última mensagem (que é a única, neste caso)
-            indice = 0;
-            mostrarMensagem(indice);
-            atualizarEstadoSetas();
-            // Se você quiser que o auto-play pare completamente após exibir a única mensagem,
-            // descomente a linha abaixo e remova as duas linhas acima (`indice = 0; mostrarMensagem(indice);`).
-            // pararAuto();
-        }
+        proximaMensagem(); // Chama a função para avançar a mensagem
     }, INTERVALO);
+
+    // Ajusta a opacidade dos botões
     btnStart.style.opacity = "0.1";
     btnStop.style.opacity = "0.7";
 }
@@ -81,33 +82,43 @@ function pararAuto() {
         clearInterval(timer);
         timer = null;
     }
+    // Ajusta a opacidade dos botões
     btnStart.style.opacity = "0.7";
     btnStop.style.opacity = "0.1";
 }
 
-// Atualiza o estado das setas (bloqueia para início/fim)
+// Atualiza o estado das setas (função mantida, mas pode ser expandida se adicionar setas visíveis)
 function atualizarEstadoSetas() {
-    // Nenhuma mudança visual para setas com apenas 1 mensagem.
+    // Por enquanto, esta função não faz nada visualmente, pois não há botões de seta no HTML.
+    // Se adicionar botões de seta (voltar/avançar), você pode habilitá-los/desabilitá-los aqui.
 }
 
 // Adiciona navegação por setas do teclado
 document.addEventListener('keydown', function(e) {
     if (e.key === "ArrowRight") {
-        pararAuto();
+        pararAuto(); // Para o slideshow automático ao usar as setas manuais
         proximaMensagem();
     } else if (e.key === "ArrowLeft") {
-        pararAuto();
+        pararAuto(); // Para o slideshow automático ao usar as setas manuais
         mensagemAnterior();
     }
 });
 
+// Adiciona os event listeners para os botões de controle
 btnStart.addEventListener('click', iniciarAuto);
 btnStop.addEventListener('click', pararAuto);
 
 // Configuração inicial quando a página carrega
-btnStart.style.opacity = "0.7";
-btnStop.style.opacity = "0.1";
+// Exibe a primeira mensagem (se houver)
+if (mensagens.length > 0) {
+    mostrarMensagem(indice);
+} else {
+    // Caso não haja mensagens, exibe uma mensagem padrão
+    mensagemBox.innerHTML = `
+        <div class="mensagem-destinatario">Ops!</div>
+        <div class="mensagem-texto">Nenhuma mensagem cadastrada ainda.</div>
+    `;
+}
 
-mostrarMensagem(indice); // Exibe a primeira (e única) mensagem
-atualizarEstadoSetas(); // Atualiza o estado das setas
-iniciarAuto(); // Inicia o "slideshow" automático (que vai exibir a mesma mensagem repetidamente, ou parar)
+atualizarEstadoSetas(); // Atualiza o estado das setas (inicial)
+iniciarAuto(); // Inicia o slideshow automático ao carregar a página
