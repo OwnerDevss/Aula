@@ -1,22 +1,18 @@
 // Mensagens do Correio Elegante (adicione/remova à vontade)
 const mensagens = [
     {
-        destinatario: "Ana",
-        mensagem: "Seu sorriso ilumina a festa inteira! ✨"
+        destinatario: "CORREIO ELEGANTE",
+        mensagem: "SUA MENSAGEM AQUI ✨"
     },
     {
-        destinatario: "Pedro",
-        mensagem: "Dançar forró com você é pura alegria! 🔥"
+        destinatario: "CORREIO ELEGANTE",
+        mensagem: "SUA MENSAGEM AQUI 🔥"
     },
+    
     {
-        destinatario: "Maria",
-        mensagem: "Que seu São João seja tão lindo quanto você! 💖"
-    },
-    {
-        destinatario: "João",
-        mensagem: "A melhor quadrilha é com você ao lado! 🌽"
-    },
-    {
+        destinatario: "CORREIO ELEGANTE",
+        mensagem: "SUA MENSAGEM AQUI 🔥"
+    },    {
         destinatario: "Para todos os forrozeiros",
         mensagem: "Feliz São João, meu povo! 🎉 Que a alegria contamine a todos!"
     }
