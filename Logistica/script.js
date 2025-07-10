@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para mostrar um slide específico
     function showSlide(index) {
-        // **ALTERAÇÃO AQUI:** Impedimos a mudança de slide se o índice estiver fora dos limites.
-        if (index < 0) { // Se tentar ir para trás do primeiro slide
-            return; // Permanece no primeiro slide
+        // Impede a navegação se o índice for menor que 0 (antes do primeiro slide)
+        if (index < 0) {
+            return;
         }
-        if (index >= slides.length) { // Se tentar ir para frente do último slide
-            return; // Permanece no último slide
+        // Impede a navegação se o índice for maior ou igual ao número total de slides (depois do último slide)
+        if (index >= slides.length) {
+            return;
         }
 
         // Oculta o slide atualmente ativo
@@ -23,6 +24,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Reinicia os GIFs do slide ativo para garantir que eles toquem do início
         restartGifsInCurrentSlide();
+
+        // Lógica para o Slide 16 (Gestão Digital de Documentos)
+        // Garante que a primeira aba (Documentos) esteja ativa e seu conteúdo visível ao entrar neste slide
+        if (currentSlideIndex === 15) { // O slide 16 tem o índice 15 (contagem a partir de 0)
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const fileGrids = document.querySelectorAll('.file-grid');
+
+            // Primeiro, remove a classe 'active' de todos os itens da sidebar e oculta todas as grades de arquivos
+            sidebarItems.forEach(item => item.classList.remove('active'));
+            fileGrids.forEach(grid => grid.classList.add('hidden'));
+
+            // Em seguida, ativa o item 'Documentos' na sidebar
+            const documentosSidebarItem = document.querySelector('.sidebar-item[data-folder="documentos"]');
+            if (documentosSidebarItem) {
+                documentosSidebarItem.classList.add('active');
+            }
+
+            // E mostra a grade de arquivos correspondente à pasta 'Documentos'
+            const documentosFileGrid = document.getElementById('folder-documentos');
+            if (documentosFileGrid) {
+                documentosFileGrid.classList.remove('hidden');
+            }
+        }
     }
 
     // Função para reiniciar os GIFs no slide atualmente visível
@@ -41,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Lógica para Simulação do Explorer de Documentos (Slide 16) ---
-
+    // Esses event listeners controlam o comportamento de clique nas abas do explorador
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const fileGrids = document.querySelectorAll('.file-grid');
 
