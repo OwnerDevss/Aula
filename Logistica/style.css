@@ -34,29 +34,28 @@ body {
     padding: 40px;
     box-sizing: border-box;
     opacity: 0;
-    transform: translateX(100%); /* Inicia fora da tela, à direita */
-    transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+    /* Remover transform: translateX(100%); aqui para uma transição mais suave apenas com opacidade */
+    /* A transição será controlada puramente pela opacidade e display */
+    transition: opacity 0.7s ease-in-out; /* Apenas transição de opacidade */
     background-color: #ffffff;
     text-align: center;
     z-index: 5; /* Slides não ativos ficam por baixo */
+    pointer-events: none; /* Impede interação em slides inativos */
 }
 
 .slide.active {
     opacity: 1;
-    transform: translateX(0); /* Entra na tela */
+    /* transform: translateX(0); Não é necessário se a transição for só de opacidade */
     z-index: 10; /* Slide ativo fica por cima */
+    pointer-events: auto; /* Permite interação no slide ativo */
 }
 
-/* Transições para o slide que sai (deixando a tela) */
-.slide.leaving.to-left {
-    transform: translateX(-100%); /* Sai para a esquerda */
-    opacity: 0;
-}
+/* As classes .leaving.to-left e .leaving.to-right não são mais usadas pelo JS atual,
+   então não são estritamente necessárias, mas se quiser mantê-las para futuras transições
+   baseadas em direção, elas não causarão problemas. */
+/* .slide.leaving.to-left { transform: translateX(-100%); opacity: 0; } */
+/* .slide.leaving.to-right { transform: translateX(100%); opacity: 0; } */
 
-.slide.leaving.to-right {
-    transform: translateX(100%); /* Sai para a direita */
-    opacity: 0;
-}
 
 h1 {
     font-size: 3em;
@@ -129,14 +128,14 @@ li::before {
     position: absolute; /* Permite movimento livre */
     height: 120px; /* Tamanho padrão para as imagens, ajuste individualmente */
     object-fit: contain;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO: Animação deve rodar por padrão, JS irá reiniciá-la */
 }
 
 /* --- Animação Introdução (Opcional) --- */
 .intro-animation img {
     height: 150px;
     animation: pulseScale 2s infinite alternate ease-in-out;
-    animation-play-state: paused;
+    /* animation-play-state: paused; REMOVIDO */
 }
 @keyframes pulseScale {
     from { transform: scale(0.95); opacity: 0.8; }
@@ -149,6 +148,7 @@ li::before {
     height: 100px;
     animation: driveAcrossScreen 3s forwards linear;
     z-index: 2;
+    /* animation-play-state: paused; REMOVIDO */
 }
 /* Animação genérica para veículos que cruzam a tela */
 @keyframes driveAcrossScreen {
@@ -164,6 +164,7 @@ li::before {
     height: 80px;
     animation: flyAcrossScreen 4s forwards ease-in-out;
     transform-origin: center center;
+    /* animation-play-state: paused; REMOVIDO */
 }
 /* Animação para o avião voar diagonalmente */
 @keyframes flyAcrossScreen {
@@ -180,6 +181,7 @@ li::before {
     height: 150px;
     animation: sailAcrossScreen 5s forwards linear;
     z-index: 2;
+    /* animation-play-state: paused; REMOVIDO */
 }
 /* Animação para o navio navegar horizontalmente */
 @keyframes sailAcrossScreen {
@@ -194,6 +196,7 @@ li::before {
 .boat-animation img {
     height: 90px;
     animation: floatAcrossScreen 4s forwards ease-in-out;
+    /* animation-play-state: paused; REMOVIDO */
 }
 /* Animação para o barco flutuar horizontalmente */
 @keyframes floatAcrossScreen {
@@ -224,7 +227,7 @@ li::before {
     border-radius: 50%;
     transform: translateY(-50%);
     animation: flowPulse 3s infinite linear;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 @keyframes flowPulse {
     0% { left: -10%; opacity: 0; }
@@ -251,7 +254,7 @@ li::before {
     font-size: 50px;
     opacity: 0.6;
     animation: coldMist 3s infinite ease-out;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 .refrigerated-animation::before {
     top: -20px;
@@ -287,7 +290,7 @@ li::before {
     content: '☣️'; /* Símbolo de risco biológico, ou pode usar ☢️ para radioativo ou ☠️ */
     font-size: 100px;
     animation: warnPulse 1.5s infinite alternate ease-in-out;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 @keyframes warnPulse {
     from { transform: scale(0.9); opacity: 0.7; }
@@ -314,7 +317,7 @@ li::before {
     font-size: 80px;
     position: absolute;
     animation: fireGlow 1s infinite alternate ease-in-out;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 .flammable-animation::before {
     transform: translateX(-30px);
@@ -344,7 +347,7 @@ li::before {
     top: -50px;
     font-size: 60px;
     animation: pourGranel 3s infinite linear;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 @keyframes pourGranel {
     0% { top: -50px; transform: translateX(0); opacity: 0; }
@@ -373,7 +376,7 @@ li::before {
     font-size: 60px;
     position: absolute;
     animation: boxFlow 2s infinite linear;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO */
 }
 .crossdock-animation::before {
     left: -80px;
@@ -395,7 +398,7 @@ li::before {
     margin-top: 50px;
     font-size: 5em; /* Apenas um emoji grande */
     animation: fadeInScale 2s infinite alternate ease-in-out;
-    animation-play-state: paused;
+    /* animation-play-state: paused; REMOVIDO */
 }
 @keyframes fadeInScale {
     0% { opacity: 0.5; transform: scale(0.9); }
@@ -428,7 +431,7 @@ li::before {
     display: flex;
     flex-direction: column;
     animation: fadeInWindow 1s ease-out forwards;
-    animation-play-state: paused; /* Controlado por JS */
+    /* animation-play-state: paused; REMOVIDO: Será iniciado pela ativação do slide */
 }
 
 .title-bar {
@@ -575,7 +578,7 @@ li::before {
     opacity: 0;
     transform: translateY(20px);
     animation: popInFile 0.4s ease-out forwards;
-    /* animation-delay será aplicado via JS */
+    /* A propriedade animation-delay será aplicada via JS no slide 16 */
 }
 
 @keyframes popInFile {
