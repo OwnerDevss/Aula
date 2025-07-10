@@ -1,0 +1,619 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Oculta barras de rolagem */
+    background-color: #e6f7ff; /* Um azul claro suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+#presentation-container {
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh; /* Altura da área de apresentação */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 15px;
+    background-color: #ffffff;
+    overflow: hidden; /* Garante que animações e slides fiquem dentro do container */
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(100%); /* Inicia fora da tela, à direita */
+    transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+    background-color: #ffffff;
+    text-align: center;
+    z-index: 5; /* Slides não ativos ficam por baixo */
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0); /* Entra na tela */
+    z-index: 10; /* Slide ativo fica por cima */
+}
+
+/* Transições para o slide que sai (deixando a tela) */
+.slide.leaving.to-left {
+    transform: translateX(-100%); /* Sai para a esquerda */
+    opacity: 0;
+}
+
+.slide.leaving.to-right {
+    transform: translateX(100%); /* Sai para a direita */
+    opacity: 0;
+}
+
+h1 {
+    font-size: 3em;
+    color: #0056b3;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h2 {
+    font-size: 2.2em;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 800px; /* Limita largura para melhor leitura */
+}
+
+/* --- ESTILO DAS LISTAS MELHORADO --- */
+ul {
+    list-style: none; /* Remove o marcador padrão */
+    text-align: left; /* Alinha a lista à esquerda dentro do slide centralizado */
+    max-width: 700px;
+    margin-top: 20px;
+    padding-left: 0; /* Remove o padding padrão para controlar o posicionamento */
+    position: relative; /* Para posicionar o ::before */
+}
+
+li {
+    margin-bottom: 12px; /* Aumenta o espaçamento entre os itens */
+    font-size: 1.1em;
+    position: relative; /* Essencial para o pseudo-elemento */
+    padding-left: 30px; /* Espaço para o marcador customizado */
+}
+
+li::before {
+    content: '▶'; /* Caractere de seta ou outro que desejar (pode ser um emoji '➡️' '💡' '✔️') */
+    color: #007bff; /* Cor do marcador */
+    font-size: 0.9em; /* Tamanho do marcador */
+    position: absolute;
+    left: 0; /* Posição à esquerda do item */
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    width: 20px; /* Garante alinhamento */
+    text-align: center;
+}
+/* --- FIM DO ESTILO DAS LISTAS MELHORADO --- */
+
+
+.animation-area {
+    margin-top: 40px;
+    width: 100%;
+    height: 250px; /* Altura generosa para as animações */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.animation-area img {
+    position: absolute; /* Permite movimento livre */
+    height: 120px; /* Tamanho padrão para as imagens, ajuste individualmente */
+    object-fit: contain;
+    animation-play-state: paused; /* Controlado por JS */
+}
+
+/* --- Animação Introdução (Opcional) --- */
+.intro-animation img {
+    height: 150px;
+    animation: pulseScale 2s infinite alternate ease-in-out;
+    animation-play-state: paused;
+}
+@keyframes pulseScale {
+    from { transform: scale(0.95); opacity: 0.8; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+
+/* --- Animação do Caminhão (Transporte Rodoviário) --- */
+.truck-animation img {
+    height: 100px;
+    animation: driveAcrossScreen 3s forwards linear;
+    z-index: 2;
+}
+/* Animação genérica para veículos que cruzam a tela */
+@keyframes driveAcrossScreen {
+    0% { transform: translateX(-150%); opacity: 0; }
+    10% { transform: translateX(-50%); opacity: 1; }
+    90% { transform: translateX(50%); opacity: 1; }
+    100% { transform: translateX(150%); opacity: 0; }
+}
+
+
+/* --- Animação do Avião (Transporte Aéreo) --- */
+.plane-animation img {
+    height: 80px;
+    animation: flyAcrossScreen 4s forwards ease-in-out;
+    transform-origin: center center;
+}
+/* Animação para o avião voar diagonalmente */
+@keyframes flyAcrossScreen {
+    0% { transform: translateX(-150%) translateY(20px) rotate(5deg); opacity: 0; }
+    10% { transform: translateX(-80%) translateY(-10px) rotate(-2deg); opacity: 1; }
+    50% { transform: translateX(0%) translateY(5px) rotate(2deg); opacity: 1; }
+    90% { transform: translateX(80%) translateY(-10px) rotate(-5deg); opacity: 1; }
+    100% { transform: translateX(150%) translateY(20px) rotate(5deg); opacity: 0; }
+}
+
+
+/* --- Animação do Navio (Transporte Marítimo) --- */
+.ship-animation img {
+    height: 150px;
+    animation: sailAcrossScreen 5s forwards linear;
+    z-index: 2;
+}
+/* Animação para o navio navegar horizontalmente */
+@keyframes sailAcrossScreen {
+    0% { transform: translateX(-120%); opacity: 0; }
+    10% { transform: translateX(-50%); opacity: 1; }
+    90% { transform: translateX(50%); opacity: 1; }
+    100% { transform: translateX(120%); opacity: 0; }
+}
+
+
+/* --- Animação da Barcaça/Barco (Transporte Fluvial) --- */
+.boat-animation img {
+    height: 90px;
+    animation: floatAcrossScreen 4s forwards ease-in-out;
+}
+/* Animação para o barco flutuar horizontalmente */
+@keyframes floatAcrossScreen {
+    0% { transform: translateX(-120%) translateY(0px); opacity: 0; }
+    15% { transform: translateX(-50%) translateY(5px); opacity: 1; }
+    85% { transform: translateX(50%) translateY(-5px); opacity: 1; }
+    100% { transform: translateX(120%) translateY(0px); opacity: 0; }
+}
+
+
+/* --- Animação de Dutos (Exemplo conceitual, sem imagem direta) --- */
+.pipeline-animation {
+    background: linear-gradient(to right, #ccc 0%, #aaa 100%);
+    border-radius: 10px;
+    height: 50px;
+    width: 80%;
+    position: relative;
+    overflow: hidden;
+}
+.pipeline-animation::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    animation: flowPulse 3s infinite linear;
+    animation-play-state: paused; /* Controlado por JS */
+}
+@keyframes flowPulse {
+    0% { left: -10%; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
+}
+
+
+/* --- Animação de Armazenagem Refrigerada --- */
+.refrigerated-animation {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    background-color: #e0f2f7;
+    border: 2px solid #a7d9ed;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.refrigerated-animation::before,
+.refrigerated-animation::after {
+    content: '❄️'; /* Floco de neve */
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.6;
+    animation: coldMist 3s infinite ease-out;
+    animation-play-state: paused; /* Controlado por JS */
+}
+.refrigerated-animation::before {
+    top: -20px;
+    left: 10%;
+    animation-delay: 0s;
+}
+.refrigerated-animation::after {
+    top: -40px;
+    left: 70%;
+    animation-delay: 1.5s;
+}
+@keyframes coldMist {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    50% { transform: translateY(50px) scale(1); opacity: 0.6; }
+    100% { transform: translateY(100px) scale(1.2); opacity: 0; }
+}
+
+
+/* --- Animação de Tóxicos --- */
+.toxic-animation {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: #ffe0e0;
+    border: 3px solid #ff0000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.toxic-animation::before {
+    content: '☣️'; /* Símbolo de risco biológico, ou pode usar ☢️ para radioativo ou ☠️ */
+    font-size: 100px;
+    animation: warnPulse 1.5s infinite alternate ease-in-out;
+    animation-play-state: paused; /* Controlado por JS */
+}
+@keyframes warnPulse {
+    from { transform: scale(0.9); opacity: 0.7; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+
+/* --- Animação de Inflamáveis --- */
+.flammable-animation {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: #fffacd;
+    border: 3px solid #ffa500;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.flammable-animation::before,
+.flammable-animation::after {
+    content: '🔥'; /* Chama */
+    font-size: 80px;
+    position: absolute;
+    animation: fireGlow 1s infinite alternate ease-in-out;
+    animation-play-state: paused; /* Controlado por JS */
+}
+.flammable-animation::before {
+    transform: translateX(-30px);
+    animation-delay: 0s;
+}
+.flammable-animation::after {
+    transform: translateX(30px);
+    animation-delay: 0.5s;
+}
+@keyframes fireGlow {
+    from { transform: scale(0.9); opacity: 0.8; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+/* --- Animação de Granel --- */
+.bulk-animation {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    background-color: #d2b48c; /* Cor de silo */
+    border-radius: 10px;
+    overflow: hidden;
+}
+.bulk-animation::before {
+    content: '🍚'; /* Saco de arroz ou grãos */
+    position: absolute;
+    top: -50px;
+    font-size: 60px;
+    animation: pourGranel 3s infinite linear;
+    animation-play-state: paused; /* Controlado por JS */
+}
+@keyframes pourGranel {
+    0% { top: -50px; transform: translateX(0); opacity: 0; }
+    10% { top: 0; transform: translateX(0); opacity: 1; }
+    90% { top: 150px; transform: translateX(0); opacity: 1; }
+    100% { top: 200px; opacity: 0; }
+}
+
+
+/* --- Animação de Cross-Docking --- */
+.crossdock-animation {
+    width: 300px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border: 2px dashed #a0a0a0;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.crossdock-animation::before,
+.crossdock-animation::after {
+    content: '📦'; /* Caixa */
+    font-size: 60px;
+    position: absolute;
+    animation: boxFlow 2s infinite linear;
+    animation-play-state: paused; /* Controlado por JS */
+}
+.crossdock-animation::before {
+    left: -80px;
+    animation-delay: 0s;
+}
+.crossdock-animation::after {
+    left: -80px;
+    animation-delay: 1s; /* Para ter caixas entrando em momentos diferentes */
+}
+@keyframes boxFlow {
+    0% { left: -80px; opacity: 0.5; }
+    20% { left: 50%; transform: translateX(-50%); opacity: 1; }
+    80% { left: 50%; transform: translateX(-50%); opacity: 1; }
+    100% { left: 110%; opacity: 0.5; }
+}
+
+/* --- Novo estilo para slide-16 (introdução aos documentos) --- */
+.minimal-document-animation {
+    margin-top: 50px;
+    font-size: 5em; /* Apenas um emoji grande */
+    animation: fadeInScale 2s infinite alternate ease-in-out;
+    animation-play-state: paused;
+}
+@keyframes fadeInScale {
+    0% { opacity: 0.5; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+
+/* --- Animação de Armazenagem de Documentos de Expedição - Windows Explorer Simulado --- */
+/* Agora, o Explorer ocupará quase toda a área do slide */
+.document-explorer-animation {
+    width: 100%;
+    height: 80%; /* Ajuste a altura para que o título e a descrição ainda caibam bem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 20px; /* Reduz margem superior pois o Explorer é maior */
+}
+
+.explorer-window {
+    width: 95%; /* Ocupa mais largura */
+    max-width: 900px; /* Aumenta a largura máxima */
+    height: 90%; /* Ocupa mais altura */
+    max-height: 600px; /* Aumenta a altura máxima */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInWindow 1s ease-out forwards;
+    animation-play-state: paused; /* Controlado por JS */
+}
+
+.title-bar {
+    background-color: #0078d4;
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.window-controls span {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+.window-controls .minimize { color: #fff; }
+.window-controls .maximize { color: #fff; }
+.window-controls .close { background-color: #e81123; padding: 0 8px; border-radius: 2px; } /* Close button style */
+
+.address-bar {
+    background-color: #e6e6e6;
+    padding: 6px 12px;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.85em;
+    color: #555;
+}
+
+.path {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+}
+
+.content-area {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 200px; /* Aumenta um pouco a largura da sidebar */
+    background-color: #e0e0e0;
+    padding: 10px 0;
+    border-right: 1px solid #ccc;
+    flex-shrink: 0;
+    overflow-y: auto; /* Para scroll se tiver muitos itens */
+}
+
+.sidebar-item {
+    padding: 10px 15px; /* Aumenta padding para melhor clique */
+    font-size: 1em; /* Aumenta fonte */
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background-color: #d0d0d0;
+}
+
+.sidebar-item.active {
+    background-color: #cce0ff;
+    border-left: 3px solid #0078d4;
+    font-weight: bold;
+}
+
+.sidebar-item .folder-icon {
+    margin-right: 10px; /* Aumenta espaço do ícone */
+    font-size: 1.4em; /* Aumenta tamanho do ícone */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 15px;
+    background-color: #fff;
+    overflow-y: auto; /* Para scroll se tiver muitos arquivos */
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* Colunas flexíveis, min-width maior */
+    gap: 20px; /* Aumenta o espaçamento */
+    text-align: center;
+}
+
+.file-grid.hidden {
+    display: none; /* Oculta grids de arquivo não ativos */
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 8px; /* Aumenta padding para melhor clique */
+    border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.file-item:hover {
+    background-color: #eef;
+    transform: translateY(-3px); /* Efeito mais pronunciado */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra ao passar o mouse */
+}
+
+.file-item .file-icon {
+    font-size: 3.5em; /* Aumenta tamanho do ícone */
+    margin-bottom: 8px; /* Mais espaço */
+}
+
+.file-item .file-name {
+    font-size: 0.9em; /* Aumenta um pouco a fonte do nome */
+    word-break: break-all;
+    max-width: 110px; /* Ajusta max-width */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Cores e ícones específicos para cada tipo de arquivo/pasta */
+.file-nfe .file-icon { color: #4CAF50; } /* Verde para Notas Fiscais */
+.file-rastreio .file-icon { color: #FFC107; } /* Amarelo para Rastreio */
+.file-folder .file-icon { color: #FF9800; } /* Laranja para Pastas */
+.file-report .file-icon { color: #007bff; } /* Azul para Relatórios */
+
+
+/* Animações específicas para os arquivos dentro do Explorer */
+@keyframes fadeInWindow {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Animação para os itens de arquivo aparecerem em cascata */
+.file-grid .file-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: popInFile 0.4s ease-out forwards;
+    /* animation-delay será aplicado via JS */
+}
+
+@keyframes popInFile {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animação para simular a abertura/seleção de um arquivo */
+@keyframes openFile {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+
+/* Responsividade para o Explorer */
+@media (max-width: 768px) {
+    .explorer-window {
+        width: 95%;
+        height: 85%;
+    }
+    .title-bar { font-size: 0.8em; padding: 6px 10px; }
+    .address-bar { font-size: 0.75em; padding: 4px 10px; }
+    .sidebar { width: 120px; font-size: 0.8em; }
+    .sidebar-item { padding: 6px 10px; }
+    .sidebar-item .folder-icon { font-size: 1em; }
+    .file-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px;}
+    .file-item .file-icon { font-size: 2.5em; }
+    .file-item .file-name { font-size: 0.75em; max-width: 80px; }
+}
+
+@media (max-width: 480px) {
+    .explorer-window {
+        width: 98%;
+        height: 80%;
+    }
+    .sidebar { display: none; } /* Oculta a barra lateral em telas muito pequenas */
+    .file-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; }
+    .file-item .file-icon { font-size: 2em; }
+    .file-item .file-name { font-size: 0.7em; max-width: 70px; }
+    
+}
