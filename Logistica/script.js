@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para mostrar um slide específico
     function showSlide(index) {
-        // Verifica se o índice está fora dos limites e impede a navegação
-        if (index < 0 || index >= slides.length) {
-            return; // Sai da função se o índice estiver fora dos limites (impede a volta ao início/fim)
+        // **ALTERAÇÃO AQUI:** Impedimos a mudança de slide se o índice estiver fora dos limites.
+        if (index < 0) { // Se tentar ir para trás do primeiro slide
+            return; // Permanece no primeiro slide
+        }
+        if (index >= slides.length) { // Se tentar ir para frente do último slide
+            return; // Permanece no último slide
         }
 
         // Oculta o slide atualmente ativo
