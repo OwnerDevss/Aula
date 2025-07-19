@@ -4,14 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Funções de Navegação dos Slides ---
 
-    // Função para mostrar um slide específico
+    /**
+     * Exibe um slide específico e gerencia a visibilidade e o reinício de GIFs.
+     * @param {number} index - O índice do slide a ser exibido.
+     */
     function showSlide(index) {
-        // Impede a navegação se o índice for menor que 0 (antes do primeiro slide)
-        if (index < 0) {
-            return;
-        }
-        // Impede a navegação se o índice for maior ou igual ao número total de slides (depois do último slide)
-        if (index >= slides.length) {
+        // Impede a navegação se o índice for inválido
+        if (index < 0 || index >= slides.length) {
             return;
         }
 
@@ -25,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reinicia os GIFs do slide ativo para garantir que eles toquem do início
         restartGifsInCurrentSlide();
 
-        // Lógica para o Slide 16 (Gestão Digital de Documentos)
-        // Garante que a primeira aba (Documentos) esteja ativa e seu conteúdo visível ao entrar neste slide
+        // Lógica específica para o Slide 16 (Gestão Digital de Documentos)
+        // Garante que a primeira aba ('Documentos') esteja ativa e seu conteúdo visível ao entrar neste slide
         if (currentSlideIndex === 15) { // O slide 16 tem o índice 15 (contagem a partir de 0)
             const sidebarItems = document.querySelectorAll('.sidebar-item');
             const fileGrids = document.querySelectorAll('.file-grid');
@@ -49,7 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para reiniciar os GIFs no slide atualmente visível
+    /**
+     * Reinicia todos os GIFs presentes no slide atualmente visível.
+     * Isso força o navegador a recarregar e reproduzir a animação desde o início.
+     */
     function restartGifsInCurrentSlide() {
         const activeSlide = slides[currentSlideIndex];
         // Seleciona todas as tags <img> cujo atributo 'src' termina com '.gif' dentro do slide ativo
