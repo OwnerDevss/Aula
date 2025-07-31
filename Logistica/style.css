@@ -1,0 +1,824 @@
+/* ========================================================================== */
+/* ESTILOS GERAIS DA PÁGINA E DO CONTAINER PRINCIPAL */
+/* ========================================================================== */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Mantém a experiência de slide em tela cheia */
+    background-color: #e6f7ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+#presentation-container {
+    width: 90%;
+    max-width: 1200px;
+    height: 90vh;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 15px;
+    background-color: #ffffff;
+    overflow: hidden; /* Oculta o que está fora do container de slides */
+}
+
+/* ========================================================================== */
+/* ESTILOS DOS SLIDES E ESTRUTURA DO CONTEÚDO */
+/* ========================================================================== */
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinhamento ao topo para não cortar conteúdo */
+    align-items: center;
+    padding: 2vw;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    background-color: #ffffff;
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+    overflow-y: auto; /* PERMITE ROLAGEM VERTICAL NO SLIDE */
+    -webkit-overflow-scrolling: touch; /* Rolagem suave em dispositivos iOS */
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* ========================================================================== */
+/* ESTILOS DE FONTES E TIPOGRAFIA */
+/* ========================================================================== */
+
+h1 {
+    font-size: 3.5vw;
+    color: #0056b3;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    word-break: break-word;
+}
+
+h2 {
+    font-size: 2.8vw;
+    color: #007bff;
+    margin-top: 1vh;
+    margin-bottom: 1.5vh;
+    word-break: break-word;
+}
+
+h3 {
+    font-size: 2.2vw;
+    color: #007bff;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    word-break: break-word;
+}
+
+h4 {
+    font-size: 1.8vw;
+    color: #007bff;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    word-break: break-word;
+}
+
+h5 {
+    font-size: 1.6vw;
+    color: #007bff;
+    margin-top: 1.5vh;
+    margin-bottom: 0.8vh;
+    word-break: break-word;
+}
+
+p {
+    font-size: 1.2vw;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-bottom: 1vh;
+    text-align: left; /* Centraliza no slide mas alinha o texto à esquerda */
+}
+
+/* --- ESTILO DAS LISTAS MELHORADO E RESPONSIVO --- */
+ul {
+    list-style: none;
+    text-align: left;
+    max-width: 80%;
+    margin-top: 2vh;
+    padding-left: 0;
+    position: relative;
+}
+
+li {
+    margin-bottom: 1.2vh;
+    font-size: 1.1vw;
+    position: relative;
+    padding-left: 3vw;
+}
+
+li::before {
+    content: '▶';
+    color: #007bff;
+    font-size: 0.9em;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2vw;
+    text-align: center;
+}
+/* --- FIM DO ESTILO DAS LISTAS --- */
+
+/* ========================================================================== */
+/* ESTILOS DE ANIMAÇÕES E COMPONENTES VISUAIS */
+/* ========================================================================== */
+
+.animation-area {
+    margin-top: 3vh;
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.animation-area img {
+    position: absolute;
+    height: 15vh;
+    object-fit: contain;
+}
+
+/* Animações dos ícones - mantenho as mesmas animações */
+.intro-animation img { height: 18vh; animation: pulseScale 2s infinite alternate ease-in-out; }
+@keyframes pulseScale { from { transform: scale(0.95); opacity: 0.8; } to { transform: scale(1.05); opacity: 1; } }
+.truck-animation img { height: 12vh; animation: driveAcrossScreen 3s forwards linear; z-index: 2; }
+@keyframes driveAcrossScreen { 0% { transform: translateX(-150%); opacity: 0; } 10% { transform: translateX(-50%); opacity: 1; } 90% { transform: translateX(50%); opacity: 1; } 100% { transform: translateX(150%); opacity: 0; } }
+.plane-animation img { height: 10vh; animation: flyAcrossScreen 4s forwards ease-in-out; transform-origin: center center; }
+@keyframes flyAcrossScreen { 0% { transform: translateX(-150%) translateY(2vh) rotate(5deg); opacity: 0; } 10% { transform: translateX(-80%) translateY(-1vh) rotate(-2deg); opacity: 1; } 50% { transform: translateX(0%) translateY(0.5vh) rotate(2deg); opacity: 1; } 90% { transform: translateX(80%) translateY(-1vh) rotate(-5deg); opacity: 1; } 100% { transform: translateX(150%) translateY(2vh) rotate(5deg); opacity: 0; } }
+.ship-animation img { height: 18vh; animation: sailAcrossScreen 5s forwards linear; z-index: 2; }
+@keyframes sailAcrossScreen { 0% { transform: translateX(-120%); opacity: 0; } 10% { transform: translateX(-50%); opacity: 1; } 90% { transform: translateX(50%); opacity: 1; } 100% { transform: translateX(120%); opacity: 0; } }
+.boat-animation img { height: 11vh; animation: floatAcrossScreen 4s forwards ease-in-out; }
+@keyframes floatAcrossScreen { 0% { transform: translateX(-120%) translateY(0px); opacity: 0; } 15% { transform: translateX(-50%) translateY(0.5vh); opacity: 1; } 85% { transform: translateX(50%) translateY(-0.5vh); opacity: 1; } 100% { transform: translateX(120%) translateY(0px); opacity: 0; } }
+.pipeline-animation { background: linear-gradient(to right, #ccc 0%, #aaa 100%); border-radius: 1vw; height: 6vh; width: 80%; position: relative; overflow: hidden; }
+.pipeline-animation::before { content: ''; position: absolute; top: 50%; left: 0; width: 2.5vw; height: 2.5vw; background-color: #007bff; border-radius: 50%; transform: translateY(-50%); animation: flowPulse 3s infinite linear; }
+@keyframes flowPulse { 0% { left: -10%; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { left: 110%; opacity: 0; } }
+.refrigerated-animation { position: relative; width: 20vw; height: 15vh; background-color: #e0f2f7; border: 0.2vw solid #a7d9ed; border-radius: 1vw; overflow: hidden; }
+.refrigerated-animation::before, .refrigerated-animation::after { content: '❄️'; position: absolute; font-size: 6vw; opacity: 0.6; animation: coldMist 3s infinite ease-out; }
+.refrigerated-animation::before { top: -2vh; left: 10%; animation-delay: 0s; }
+.refrigerated-animation::after { top: -4vh; left: 70%; animation-delay: 1.5s; }
+@keyframes coldMist { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 50% { transform: translateY(5vh) scale(1); opacity: 0.6; } 100% { transform: translateY(10vh) scale(1.2); opacity: 0; } }
+.toxic-animation { position: relative; width: 15vw; height: 15vw; background-color: #ffe0e0; border: 0.3vw solid #ff0000; border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.toxic-animation::before { content: '☣️'; font-size: 12vw; animation: warnPulse 1.5s infinite alternate ease-in-out; }
+@keyframes warnPulse { from { transform: scale(0.9); opacity: 0.7; } to { transform: scale(1.1); opacity: 1; } }
+.flammable-animation { position: relative; width: 15vw; height: 15vw; background-color: #fffacd; border: 0.3vw solid #ffa500; border-radius: 1vw; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.flammable-animation::before, .flammable-animation::after { content: '🔥'; font-size: 10vw; position: absolute; animation: fireGlow 1s infinite alternate ease-in-out; }
+.flammable-animation::before { transform: translateX(-3vw); animation-delay: 0s; }
+.flammable-animation::after { transform: translateX(3vw); animation-delay: 0.5s; }
+@keyframes fireGlow { from { transform: scale(0.9); opacity: 0.8; } to { transform: scale(1.05); opacity: 1; } }
+.bulk-animation { width: 20vw; height: 20vh; position: relative; background-color: #d2b48c; border-radius: 1vw; overflow: hidden; }
+.bulk-animation::before { content: '🍚'; position: absolute; top: -5vh; font-size: 8vw; animation: pourGranel 3s infinite linear; }
+@keyframes pourGranel { 0% { top: -5vh; transform: translateX(0); opacity: 0; } 10% { top: 0; transform: translateX(0); opacity: 1; } 90% { top: 15vh; transform: translateX(0); opacity: 1; } 100% { top: 20vh; opacity: 0; } }
+.crossdock-animation { width: 30vw; height: 15vh; background-color: #f0f0f0; border: 0.2vw dashed #a0a0a0; border-radius: 1vw; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-around; }
+.crossdock-animation::before, .crossdock-animation::after { content: '📦'; font-size: 8vw; position: absolute; animation: boxFlow 2s infinite linear; }
+@keyframes boxFlow { 0% { transform: translateX(-15vw); opacity: 0; } 20% { transform: translateX(-5vw); opacity: 1; } 80% { transform: translateX(5vw); opacity: 1; } 100% { transform: translateX(15vw); opacity: 0; } }
+
+/* ========================================================================== */
+/* ESTILOS ESPECÍFICOS PARA O SLIDE DO EXPLORADOR DE ARQUIVOS */
+/* ========================================================================== */
+
+.document-explorer-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    padding: 1vh 0;
+}
+
+.explorer-window {
+    width: 95%;
+    max-width: 950px;
+    height: 90%;
+    max-height: 650px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 0.8vw;
+    box-shadow: 0 0.4vh 1.5vh rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 2vh;
+}
+
+.title-bar {
+    background-color: #007bff;
+    color: white;
+    padding: 1vh 1.5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 0.8vw;
+    border-top-right-radius: 0.8vw;
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+
+.window-controls span { margin-left: 1vw; cursor: pointer; font-size: 1.1em; }
+.address-bar { background-color: #e9ecef; padding: 0.8vh 1.5vw; border-bottom: 1px solid #dee2e6; font-size: 0.9vw; color: #666; text-align: left; }
+.content-area { display: flex; flex-grow: 1; }
+.sidebar { width: 15vw; min-width: 120px; background-color: #f0f2f5; padding: 1.5vh 0; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; gap: 0.5vh; }
+.sidebar-item { padding: 1vh 1.5vw; display: flex; align-items: center; gap: 1vw; cursor: pointer; transition: background-color 0.2s ease; font-size: 1vw; color: #444; }
+.sidebar-item:hover { background-color: #e2e6ea; }
+.sidebar-item.active { background-color: #d1e7ff; color: #0056b3; font-weight: bold; border-right: 0.3vw solid #007bff; }
+.main-content { flex-grow: 1; padding: 1.5vh; display: flex; flex-direction: column; }
+.file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr)); gap: 2vw; width: 100%; }
+.file-item { display: flex; flex-direction: column; align-items: center; padding: 1.5vw; border: 1px solid #e0e0e0; border-radius: 0.5vw; background-color: #fff; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; text-align: center; word-break: break-word; text-decoration: none; color: inherit; }
+.file-item:hover { transform: translateY(-0.3vh); box-shadow: 0 0.5vh 1.5vh rgba(0, 0, 0, 0.1); }
+.file-icon { font-size: 4vw; margin-bottom: 0.8vh; }
+.file-name { font-size: 1vw; color: #333; }
+.file-nfe .file-icon { color: #28a745; }
+.file-rastreio .file-icon { color: #ffc107; }
+.file-image .file-icon { color: #17a2b8; }
+.file-report .file-icon { color: #dc3545; }
+.file-folder .file-icon { color: #6c757d; }
+.hidden { display: none !important; }
+
+.slide a.tracking-button {
+    display: inline-block;
+    padding: 1.2vh 2.5vw;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1.1vw;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 3vh;
+}
+.slide a.tracking-button:hover { background-color: #0056b3; }
+
+/* ========================================================================== */
+/* ESTILOS ESPECÍFICOS DO SLIDE DE COMPARAÇÃO */
+/* ========================================================================== */
+
+#slide-16 {
+    justify-content: flex-start;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+#slide-16 table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 2vh;
+    font-size: 1.2vw;
+    text-align: left;
+    display: block; /* Permite rolagem horizontal */
+    overflow-x: auto;
+    white-space: nowrap; /* Impede a quebra de linha da tabela */
+}
+
+#slide-16 table th, #slide-16 table td {
+    padding: 1.5vh 1.5vw;
+    border: 1px solid #ddd;
+    word-break: break-word;
+    white-space: normal;
+}
+
+#slide-16 table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ========================================================================== */
+/* MEDIA QUERIES PARA RESPONSIVIDADE EM DIFERENTES TELAS */
+/* ========================================================================== */
+
+/* Telas menores que 1024px */
+@media screen and (max-width: 1024px) {
+    h1 { font-size: 4vw; }
+    h2 { font-size: 3.5vw; }
+    h3 { font-size: 2.8vw; }
+    h4 { font-size: 2.2vw; }
+    h5 { font-size: 2vw; }
+    p { font-size: 1.5vw; }
+    li { font-size: 1.4vw; padding-left: 4vw;}
+    li::before { width: 3vw; }
+    .animation-area img { height: 12vh; }
+    .title-bar { font-size: 1.5vw; }
+    .address-bar { font-size: 1.1vw; }
+    .sidebar-item { font-size: 1.2vw; padding: 1vh 2vw;}
+    .file-icon { font-size: 5vw; }
+    .file-name { font-size: 1.2vw; }
+    .slide a.tracking-button { font-size: 1.3vw; padding: 1.5vh 3vw; }
+    #slide-16 table { font-size: 1.5vw; }
+}
+
+/* Telas menores que 768px */
+@media screen and (max-width: 768px) {
+    #presentation-container { width: 95%; height: 95vh; border-radius: 10px; }
+    .slide { padding: 4vw; }
+    h1 { font-size: 6vw; }
+    h2 { font-size: 5vw; }
+    h3 { font-size: 4.5vw; }
+    h4 { font-size: 4vw; }
+    h5 { font-size: 3.5vw; }
+    p { font-size: 2.5vw; max-width: 95%; }
+    ul { max-width: 95%; }
+    li { font-size: 2.2vw; margin-bottom: 1.5vh; padding-left: 5vw;}
+    li::before { width: 4vw; }
+    .animation-area { height: 20vh; margin-top: 2vh;}
+    .animation-area img { height: 10vh; }
+    .explorer-window { height: 85%; max-height: unset; }
+    .title-bar { font-size: 2vw; padding: 1.5vh 2.5vw; }
+    .window-controls span { font-size: 1.5em; }
+    .address-bar { font-size: 1.8vw; padding: 1vh 2.5vw;}
+    .content-area { flex-direction: column; }
+    .sidebar { width: 100%; min-width: unset; border-right: none; border-bottom: 1px solid #e0e0e0; flex-direction: row; justify-content: center; overflow-x: auto; padding: 1vh 0; }
+    .sidebar-item { font-size: 2.2vw; gap: 0.5vw; padding: 1vh 2vw; white-space: nowrap; border-right: none; border-bottom: none; border-left: none; }
+    .sidebar-item.active { border-right: none; border-bottom: 3px solid #007bff; }
+    .main-content { padding: 1.5vh; }
+    .file-grid { grid-template-columns: repeat(auto-fill, minmax(25vw, 1fr)); gap: 3vw; }
+    .file-item { padding: 2vw; border-radius: 1vw; }
+    .file-icon { font-size: 7vw; }
+    .file-name { font-size: 2.2vw; }
+    .slide a.tracking-button { font-size: 2vw; padding: 1.5vh 4vw; }
+    #slide-16 table { font-size: 2.2vw; }
+}
+
+/* Telas menores que 480px */
+@media screen and (max-width: 480px) {
+    h1 { font-size: 8vw; }
+    h2 { font-size: 6.5vw; }
+    h3 { font-size: 6vw; }
+    h4 { font-size: 5.5vw; }
+    h5 { font-size: 5vw; }
+    p { font-size: 3.5vw; }
+    li { font-size: 3vw; padding-left: 7vw;}
+    li::before { width: 5vw; font-size: 1em; }
+    .animation-area { height: 18vh; margin-top: 1.5vh;}
+    .animation-area img { height: 8vh; }
+    .explorer-window { border-radius: 5px; }
+    .title-bar { font-size: 3vw; padding: 1vh 3vw; }
+    .address-bar { font-size: 2.5vw; padding: 0.8vh 3vw; }
+    .sidebar-item { font-size: 3vw; padding: 0.8vh 2.5vw;}
+    .file-grid { grid-template-columns: repeat(auto-fill, minmax(35vw, 1fr)); gap: 4vw; }
+    .file-item { padding: 3vw; border-radius: 1.5vw; }
+    .file-icon { font-size: 8vw; }
+    .file-name { font-size: 3vw; }
+    .slide a.tracking-button { font-size: 3vw; padding: 1.5vh 5vw; }
+    #slide-16 table { font-size: 3vw; }
+}
+
+/* --- Estilos para Simulação de WMS (Slide 3) --- */
+.wms-animation {
+    height: 50vh;
+    padding: 2vw;
+    box-sizing: border-box;
+}
+
+.warehouse-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5vw;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    background-color: #f0f0f0;
+    padding: 2vw;
+    border-radius: 1vw;
+    border: 1px solid #ccc;
+}
+
+.pallet {
+    background-color: #d2b48c;
+    border: 1px solid #a07850;
+    border-radius: 0.5vw;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pallet:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 1.5vw rgba(0, 123, 255, 0.5);
+    z-index: 15;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #007bff;
+    color: white;
+    padding: 1vh 1.5vw;
+    border-radius: 0.5vw;
+    font-size: 1.2vw;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 20;
+    transform: translate(-50%, -120%);
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+/* Responsividade do WMS */
+@media screen and (max-width: 768px) {
+    .warehouse-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3vw;
+    }
+    .pallet {
+        border-radius: 1vw;
+    }
+    .tooltip {
+        font-size: 2.5vw;
+        padding: 1.5vh 2.5vw;
+        border-radius: 1vw;
+    }
+}
+
+/* --- Estilos para FIFO/LIFO (Slide 5) --- */
+.fifo-lifo-animation {
+    height: 50vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3vh;
+}
+
+.box-stack {
+    display: flex;
+    flex-direction: column-reverse; /* Cria a pilha de baixo para cima */
+    align-items: center;
+    justify-content: flex-start;
+    height: 80%;
+    width: 30vw;
+    max-width: 300px;
+    border-bottom: 2px solid #ccc;
+    position: relative;
+}
+
+.box {
+    width: 80%;
+    height: 10vh;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: white;
+    margin-bottom: -2px; /* Remove o espaço entre as caixas */
+    transition: transform 0.5s ease;
+}
+
+.controls {
+    display: flex;
+    gap: 1vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.controls button {
+    padding: 1.2vh 2.5vw;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 1.1vw;
+    transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade do FIFO/LIFO */
+@media screen and (max-width: 768px) {
+    .box-stack {
+        width: 50vw;
+    }
+    .box {
+        height: 8vh;
+        font-size: 3vw;
+    }
+    .controls button {
+        font-size: 2vw;
+        padding: 1.5vh 3vw;
+    }
+}
+
+
+
+
+
+/* ========================================================================== */
+/* ESTILOS ESPECÍFICOS PARA OS NOVOS SLIDES DE WMS */
+/* ========================================================================== */
+
+/* Estilos para o slide de introdução ao WMS */
+#slide-wms-intro h2 {
+    color: #007bff;
+    font-size: 2.8vw;
+    margin-bottom: 2vh;
+}
+
+#slide-wms-intro ol {
+    list-style-type: decimal;
+    margin: 2vh auto;
+    padding-left: 2vw; /* Indentação para a lista */
+    text-align: left;
+    max-width: 80%;
+}
+
+#slide-wms-intro li {
+    font-size: 1.2vw;
+    line-height: 1.6;
+    margin-bottom: 1.5vh;
+    padding-left: 0;
+}
+
+/* Remove o ícone customizado da lista ordenada, deixando o número padrão */
+#slide-wms-intro li::before {
+    content: none;
+}
+
+/* =================================================================
+    --- Slides de Demonstração (WMS, FIFO/LIFO) ---
+    ================================================================= */
+
+#slide-wms-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.wms-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.warehouse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.pallet {
+    position: relative;
+    background-color: #d2b48c;
+    border: 2px solid #8b6d49;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #4b3826;
+    height: 100px;
+}
+
+.pallet:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.pallet .tooltip {
+    /* Estado inicial: oculto */
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: -15px; /* Posição inicial, um pouco acima */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Estilização do tooltip */
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    pointer-events: none; /* Impede que o mouse interaja com o tooltip */
+    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
+}
+
+.pallet:hover .tooltip {
+    /* Estado final: visível e posicionado */
+    visibility: visible;
+    opacity: 1;
+    top: -25px; /* Anima o movimento para cima */
+}
+
+.pallet .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #3498db transparent transparent transparent;
+}
+
+.wms-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.warehouse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.pallet {
+    position: relative;
+    background-color: #d2b48c;
+    border: 2px solid #8b6d49;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #4b3826;
+    height: 100px; /* Altura fixa para pallets */
+}
+
+.pallet:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: -15px; /* Posiciona acima do pallet */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
+    z-index: 10;
+    pointer-events: none;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pallet:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    top: -25px; /* Move para cima ao aparecer */
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #3498db transparent transparent transparent;
+}
+/* ========================================================================== */
+/* MEDIA QUERIES PARA OS ESTILOS DO WMS */
+/* ========================================================================== */
+
+@media screen and (max-width: 1024px) {
+    #slide-wms-intro ol {
+        max-width: 90%;
+        padding-left: 3vw;
+    }
+    #slide-wms-intro li {
+        font-size: 1.4vw;
+    }
+    .warehouse-grid {
+        gap: 2vw;
+    }
+    .tooltip {
+        font-size: 1.5vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #slide-wms-intro h2 {
+        font-size: 5vw;
+    }
+    #slide-wms-intro p {
+        font-size: 2.5vw;
+    }
+    #slide-wms-intro ol {
+        max-width: 95%;
+        padding-left: 4vw;
+    }
+    #slide-wms-intro li {
+        font-size: 2.2vw;
+    }
+    .wms-animation {
+        height: auto;
+        padding-bottom: 5vh;
+    }
+    .warehouse-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3vw;
+        padding: 4vw;
+    }
+    .pallet {
+        border-radius: 1vw;
+    }
+    .tooltip {
+        font-size: 2.5vw;
+        padding: 1.5vh 2.5vw;
+        border-radius: 1vw;
+        white-space: normal;
+        transform: translate(-50%, -130%);
+        max-width: 30vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #slide-wms-intro h2 {
+        font-size: 6.5vw;
+    }
+    #slide-wms-intro p {
+        font-size: 3.5vw;
+    }
+    #slide-wms-intro li {
+        font-size: 3vw;
+    }
+    .warehouse-grid {
+        grid-template-columns: 1fr; /* Uma coluna para telas muito pequenas */
+        gap: 5vw;
+        padding: 5vw;
+    }
+    .pallet {
+        padding-bottom: 50%;
+    }
+    .tooltip {
+        font-size: 3.5vw;
+        padding: 1.5vh 3vw;
+        max-width: 60vw;
+        transform: translate(-50%, -130%);
+    }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Rastreio - Logística Moderna</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #0056b3;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Inclui padding e border no width */
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #trackingStatus {
+            margin-top: 30px;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .status-item::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            border-radius: 50%;
+            position: absolute;
+            left: -25px; /* Posição do ponto */
+            top: 5px;
+            z-index: 1;
+        }
+
+        .status-item:not(:last-child)::after {
+            content: '';
+            width: 2px;
+            height: calc(100% + 15px); /* Altura da linha entre os pontos */
+            background-color: #ccc;
+            position: absolute;
+            left: -20px; /* Posição da linha */
+            top: 15px;
+            z-index: 0;
+        }
+
+        .status-text {
+            margin-left: 20px;
+        }
+
+        .status-text strong {
+            display: block;
+            font-size: 1.1em;
+            color: #0056b3;
+        }
+
+        .status-text span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de Rastreio</h1>
+        <div class="input-group">
+            <input type="text" id="trackingInput" placeholder="Insira o código de rastreio">
+            <button onclick="consultarRastreio()">Consultar</button>
+        </div>
+        <div id="trackingStatus">
+            </div>
+    </div>
+
+    <script>
+        function consultarRastreio() {
+            const trackingCode = document.getElementById('trackingInput').value.trim();
+            const trackingStatusDiv = document.getElementById('trackingStatus');
+            const fictiousCode = "BR123456789XX"; // Nosso código de rastreio fictício
+
+            trackingStatusDiv.innerHTML = ''; // Limpa resultados anteriores
+
+            if (trackingCode === "") {
+                trackingStatusDiv.innerHTML = '<p class="message">Por favor, insira um código de rastreio.</p>';
+                return;
+            }
+
+            if (trackingCode.toUpperCase() === fictiousCode) {
+                const statusData = [
+                    { time: '10:00', date: '15/07/2025', location: 'São Paulo, SP', description: 'Objeto postado.' },
+                    { time: '14:30', date: '15/07/2025', location: 'São Paulo, SP', description: 'Objeto em trânsito - de Agência para Unidade de Tratamento.' },
+                    { time: '08:00', date: '16/07/2025', location: 'Curitiba, PR', description: 'Objeto recebido na Unidade de Tratamento.' },
+                    { time: '11:45', date: '16/07/2025', location: 'Curitiba, PR', description: 'Objeto em trânsito - de Unidade de Tratamento para Unidade de Distribuição.' },
+                    { time: '09:15', date: '17/07/2025', location: 'Ilhéus, BA', description: 'Objeto recebido na Unidade de Distribuição.' },
+                    { time: '13:00', date: '17/07/2025', location: 'Ilhéus, BA', description: 'Objeto saiu para entrega ao destinatário.' },
+                    { time: '17:00', date: '17/07/2025', location: 'Ilhéus, BA', description: 'Objeto entregue ao destinatário.' }
+                ];
+
+                statusData.reverse().forEach(status => { // Exibe do mais recente para o mais antigo
+                    const statusItem = document.createElement('div');
+                    statusItem.classList.add('status-item');
+                    statusItem.innerHTML = `
+                        <div class="status-text">
+                            <strong>${status.description}</strong>
+                            <span>${status.date} ${status.time} - ${status.location}</span>
+                        </div>
+                    `;
+                    trackingStatusDiv.appendChild(statusItem);
+                });
+            } else {
+                trackingStatusDiv.innerHTML = '<p class="message">Código de rastreio não encontrado. Por favor, verifique o código e tente novamente.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
