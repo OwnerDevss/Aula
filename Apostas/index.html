@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEL - Assunto: Apostas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide { display: none; }
+        .slide.active { display: flex; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .casino-card { background: #1a1a1a; border: 1px solid #333; transition: all 0.3s; }
+        .slot-machine { font-family: 'Courier New', Courier, monospace; letter-spacing: 5px; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900 overflow-hidden">
+
+    <header class="fixed top-0 w-full bg-white shadow-md z-50 p-4 flex justify-between items-center">
+        <img src="https://www.ielbahia.com.br/wp-content/uploads/2023/09/site-3.png" alt="IEL Logo" class="h-10">
+        <span class="font-bold text-blue-800 uppercase tracking-widest text-sm">Matéria: Apostas</span>
+    </header>
+
+    <main id="slider-container" class="h-screen w-full flex items-center justify-center pt-16 outline-none" tabindex="0">
+        
+        <section class="slide active flex-col p-8 text-center max-w-2xl">
+            <h1 class="text-5xl font-black text-gray-800 mb-4">Apostas: O Fenômeno das Bets</h1>
+            <p class="text-xl text-gray-600">Uma análise histórica, social e o impacto da regulamentação no Brasil.</p>
+            <div class="mt-8 animate-bounce text-blue-600">Deslize para começar →</div>
+        </section>
+
+        <section class="slide flex-col p-6 md:p-12 max-w-4xl overflow-y-auto">
+            <h2 class="text-3xl font-bold border-b-4 border-blue-600 pb-2 mb-4 uppercase">Origens e Conceito</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <p class="text-lg leading-relaxed text-justify">
+                    Uma aposta é um contrato entre a casa e o apostador. A prática remonta à <strong>China (2300 a.C.)</strong> e consolidou-se em <strong>Roma</strong>, onde gladiadores eram as estrelas das apostas em circos.
+                </p>
+                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600 italic">
+                    "Na Idade Média, embora criticada pela Igreja, a prática evoluiu para loterias públicas para financiar obras estatais."
+                </div>
+            </div>
+        </section>
+
+        <section class="slide flex-col p-6 md:p-12 max-w-4xl">
+            <h2 class="text-3xl font-bold border-b-4 border-green-600 pb-2 mb-4 uppercase">A PEC das Bets</h2>
+            <p class="mb-4">A proposta busca regulamentar o mercado online no Brasil para arrecadar impostos e fiscalizar fraudes.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-4 shadow rounded border-t-4 border-red-500"><strong>Risco:</strong> Endividamento de jovens.</div>
+                <div class="bg-white p-4 shadow rounded border-t-4 border-yellow-500"><strong>Alerta:</strong> Vício e falta de controle.</div>
+                <div class="bg-white p-4 shadow rounded border-t-4 border-green-500"><strong>Foco:</strong> Educação Financeira.</div>
+            </div>
+        </section>
+
+        <section class="slide flex-col p-6 md:p-12 max-w-4xl">
+            <h2 class="text-3xl font-bold border-b-4 border-orange-600 pb-2 mb-4 uppercase">O Jogo do Bicho (1892)</h2>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <p class="mb-4 italic">Criado pelo Barão de Drummond no Rio de Janeiro para atrair visitantes ao zoológico.</p>
+                <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                    <li><strong>Como funciona:</strong> 25 animais, cada um representando 4 números.</li>
+                    <li><strong>Status:</strong> Considerado contravenção penal desde 1941.</li>
+                    <li><strong>Cultura:</strong> Permanece vivo na informalidade de bares e mercados.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="slide flex-col p-4 md:p-8 w-full max-w-5xl h-full justify-center">
+            <h2 class="text-2xl font-bold text-center mb-6 uppercase tracking-tighter">Simulador de Probabilidade: Realidade vs. Ilusão</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 h-auto">
+                <div class="casino-card p-6 rounded-2xl text-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-green-600 text-[10px] px-2 py-1 rounded-full animate-pulse">MODO INFLUENCER</span>
+                        <span class="text-green-400 font-bold" id="prob-inf">Sorte: 100%</span>
+                    </div>
+                    <div id="display-inf" class="slot-machine text-4xl text-center py-8 bg-black rounded mb-4">🍒|🍒|🍒</div>
+                    <button onclick="playCasino('inf')" class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold transition">APOSTAR R$ 10,00</button>
+                    <p id="msg-inf" class="mt-2 text-sm text-center text-green-300 h-5"></p>
+                </div>
+
+                <div class="casino-card p-6 rounded-2xl text-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="bg-red-600 text-[10px] px-2 py-1 rounded-full">CONTA REAL</span>
+                        <span class="text-red-400 font-bold" id="prob-real">Derrota: 65%</span>
+                    </div>
+                    <div id="display-real" class="slot-machine text-4xl text-center py-8 bg-black rounded mb-4">❓|❓|❓</div>
+                    <button onclick="playCasino('real')" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-xl font-bold transition">APOSTAR R$ 10,00</button>
+                    <p id="msg-real" class="mt-2 text-sm text-center text-red-300 h-5"></p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-6">*Simulação para fins educativos. O algoritmo "influencer" é programado para enganar.</p>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-8 w-full flex justify-between px-8 pointer-events-none">
+        <button onclick="prevSlide()" class="pointer-events-auto bg-white/80 p-4 rounded-full shadow-lg hover:bg-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button onclick="nextSlide()" class="pointer-events-auto bg-white/80 p-4 rounded-full shadow-lg hover:bg-white transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
+
+    <script>
+        // Lógica dos Slides
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Atalhos de Teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") nextSlide();
+            if (e.key === "ArrowLeft") prevSlide();
+        });
+
+        // Touch para celular
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide();
+            if (touchendX - touchstartX > 50) prevSlide();
+        });
+
+        // Lógica do Cassino
+        const icons = ["🍒", "🍋", "🔔", "💎", "7️⃣"];
+        let realLossRate = 65;
+
+        function playCasino(type) {
+            const display = document.getElementById(`display-${type}`);
+            const msg = document.getElementById(`msg-${type}`);
+            const probText = document.getElementById(`prob-real`);
+            
+            display.innerText = "🎰|🎰|🎰";
+            
+            setTimeout(() => {
+                if (type === 'inf') {
+                    // 100% Vitória
+                    display.innerText = "💎|💎|💎";
+                    msg.innerText = "VOCÊ GANHOU R$ 500,00!";
+                } else {
+                    // Lógica Real
+                    let win = Math.random() * 100 > realLossRate;
+                    if (win) {
+                        display.innerText = "7️⃣|7️⃣|7️⃣";
+                        msg.innerText = "GANHOU! (Raro)";
+                        // Aumenta dificuldade a cada vitória
+                        realLossRate = Math.min(95, realLossRate + 5);
+                        probText.innerText = `Derrota: ${realLossRate}%`;
+                    } else {
+                        const r1 = icons[Math.floor(Math.random()*icons.length)];
+                        let r2 = icons[Math.floor(Math.random()*icons.length)];
+                        let r3 = icons[Math.floor(Math.random()*icons.length)];
+                        // Garante que não sejam 3 iguais
+                        if(r1 === r2 && r2 === r3) r3 = icons[(icons.indexOf(r3)+1)%icons.length];
+                        display.innerText = `${r1}|${r2}|${r3}`;
+                        msg.innerText = "Você perdeu. Tente novamente!";
+                    }
+                }
+            }, 500);
+        }
+    </script>
+</body>
+</html>
